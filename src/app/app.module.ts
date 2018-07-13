@@ -1,3 +1,5 @@
+import { CadastroPageModule } from './../pages/cadastro/cadastro.module';
+import { CadastroPage } from './../pages/cadastro/cadastro';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -6,6 +8,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { ApiProvider } from '../providers/api/api';
+import { UserProvider } from '../providers/user/user';
+import { HttpClientModule } from '../../node_modules/@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,17 +19,22 @@ import { HomePage } from '../pages/home/home';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule,
+    CadastroPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    CadastroPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ApiProvider,
+    UserProvider
   ]
 })
 export class AppModule {}
