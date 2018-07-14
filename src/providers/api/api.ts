@@ -34,8 +34,8 @@ export class ApiProvider {
     return this.http.get(this.url + '/' + endpoint, reqOpts);
   }
 
-  post(endpoint: string, body: any, reqOpts?: any) {
-    return this.http.post(this.url + '/' + endpoint, body, reqOpts);
+  post(endpoint: string, body: any, header: any) {
+    return this.http.post(this.url + '/' + endpoint, body, header);
   }
 
   put(endpoint: string, body: any, reqOpts?: any) {

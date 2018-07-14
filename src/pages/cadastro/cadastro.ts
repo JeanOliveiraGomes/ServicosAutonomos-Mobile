@@ -38,9 +38,7 @@ export class CadastroPage {
        this.user.cadastrar(this.account).subscribe((resp) => {
         this.navCtrl.push(HomePage);
       }, (err) => {
-  
-        this.navCtrl.push(HomePage);
-  
+          
         // Unable to sign up
         let toast = this.toastCtrl.create({
           message: 'Erro ao cadastar',

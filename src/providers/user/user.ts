@@ -1,6 +1,7 @@
 import { ApiProvider } from './../api/api';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 /*
   Generated class for the UserProvider provider.
@@ -12,22 +13,14 @@ import 'rxjs/add/operator/toPromise';
 export class UserProvider {
   _user: any;
 
-  constructor(public api: ApiProvider) {
+  constructor(public api: ApiProvider,public  http: HttpClient) {
     console.log('Hello UserProvider Provider');
   }
 
 
   cadastrar(credenciais: any){
-    let requisicao = this.api.post('usuarios' , credenciais);
-    
-    requisicao.subscribe((res: any)=>{
-      if(res.status == 'success'){
-        this._loggedIn(res);
-      }
-    }, err =>{
-      console.error('ERRO AO CADASTRAR', err);
-    }
-    );
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    let requisicao = this.api.post('usuarios' , credenciais,{headers});
     return requisicao;
   }
 
