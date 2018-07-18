@@ -1,3 +1,5 @@
+import { CadastroPage } from './../cadastro/cadastro';
+import { ServicoCadastroPage } from './../servico-cadastro/servico-cadastro';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -11,4 +13,10 @@ export class HomePage {
 
   }
 
+  goCadastrarServico(){
+    this.navCtrl.push(ServicoCadastroPage);
+  }
+  goCadastro(){
+    this.navCtrl.push(CadastroPage);
+  }
 }

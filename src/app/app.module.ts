@@ -1,3 +1,5 @@
+import { ServicoCadastroPageModule } from './../pages/servico-cadastro/servico-cadastro.module';
+import { ServicoCadastroPage } from './../pages/servico-cadastro/servico-cadastro';
 import { CadastroPageModule } from './../pages/cadastro/cadastro.module';
 import { CadastroPage } from './../pages/cadastro/cadastro';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,13 +23,15 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    CadastroPageModule
+    CadastroPageModule,
+    ServicoCadastroPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    CadastroPage
+    CadastroPage,
+    ServicoCadastroPage
   ],
   providers: [
     StatusBar,
