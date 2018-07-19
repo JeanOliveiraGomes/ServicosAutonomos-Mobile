@@ -1,3 +1,4 @@
+import { LoginPage } from './../login/login';
 import { CadastroPage } from './../cadastro/cadastro';
 import { ServicoCadastroPage } from './../servico-cadastro/servico-cadastro';
 import { Component } from '@angular/core';
@@ -18,5 +19,8 @@ export class HomePage {
   }
   goCadastro(){
     this.navCtrl.push(CadastroPage);
+  }
+  goLogin(){
+    this.navCtrl.push(LoginPage);
   }
 }

@@ -20,10 +20,21 @@ export class UserProvider {
 
   cadastrar(credenciais: any){
     let headers = new HttpHeaders().set('Content-Type','application/json');
-    let requisicao = this.api.post('usuarios' , credenciais,{headers});
+    let requisicao = this.api.post('usuarios' , JSON.parse(credenciais),{headers});
     return requisicao;
   }
 
+  login(credenciais: any){
+  
+    let request = this.api.post('login',credenciais, {responseType: 'text'});
+
+    request.subscribe((data: any)=>{
+      
+      this._loggedIn(data);
+      
+    });
+    return request;
+  }
 
     /**
    * Log the user out, which forgets the session
@@ -36,6 +47,6 @@ export class UserProvider {
    * Process a login/signup response to store user data
    */
   _loggedIn(resp) {
-    this._user = resp.user;
+    this._user = resp;
   }
 }
