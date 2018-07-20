@@ -20,7 +20,7 @@ export class UserProvider {
 
   cadastrar(credenciais: any){
     let headers = new HttpHeaders().set('Content-Type','application/json');
-    let requisicao = this.api.post('usuarios' , JSON.parse(credenciais),{headers});
+    let requisicao = this.api.post('usuarios' , credenciais,{headers});
     return requisicao;
   }
 
