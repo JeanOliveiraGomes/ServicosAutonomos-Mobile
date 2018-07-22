@@ -1,9 +1,4 @@
-<!--
-  Generated template for the ServicoCadastroPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -14,45 +9,36 @@
 
 
 <ion-content padding>
+
+  <p>PARA FUNCINAR CADASTRE CATEGORIAS E ATRELE OS VALORIAS AO FORMULARIO, NECESSARIO ESTAR LOGADO</p>
   <form (submit)="cadastrar()">
     <ion-list>
 
       <ion-item>
         <ion-label floating>Titulo do Anuncio</ion-label>
-        <ion-input type="text" name="titulo"></ion-input>
+        <ion-input [(ngModel)]="servico.titulo" type="text" name="titulo"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>descrição do Anuncio</ion-label>
-        <ion-input type="text"  name="descricao"></ion-input>
+        <ion-input [(ngModel)]="servico.descricao" type="text"  name="descricao"></ion-input>
       </ion-item>
-
-      <!--
-      Want to add a Username? Here you go:
-
-      <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
-      </ion-item>
-      -->
-
+  
       <ion-item>
         <ion-label>Categoria</ion-label>
-        <ion-select >
-          <ion-option>Outros</ion-option>
-          <ion-option>Informatica/TI</ion-option>
-          <ion-option>Servicos Domesticos</ion-option>
-          <ion-option>Construção e Engenharia</ion-option>
-          <ion-option>Saude</ion-option>
-          <ion-option>Educação</ion-option>
+        <ion-select [(ngModel)]="categoria" name="categoria">
+          <ion-option value="5b53e5917e6fd623b8d1f853">TI</ion-option>
+          <ion-option value="SrvicosGerais">Outros</ion-option>
         </ion-select>
       </ion-item>
-        
+     
       <div padding>
         <button ion-button color="secondary" block  >Divulga Oportunidade de Serviço</button>
       </div>
 
     </ion-list>
   </form>
+ {{categoria}}
+
 
 </ion-content>

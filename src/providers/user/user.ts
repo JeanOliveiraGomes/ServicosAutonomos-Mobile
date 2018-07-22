@@ -31,6 +31,7 @@ export class UserProvider {
     request.subscribe((data: any)=>{
       
       this._loggedIn(data);
+      console.log(data);
       
     });
     return request;
@@ -48,5 +49,9 @@ export class UserProvider {
    */
   _loggedIn(resp) {
     this._user = resp;
+  }
+
+  getAutorizationToken(){
+    return this._user
   }
 }

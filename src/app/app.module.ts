@@ -14,6 +14,7 @@ import { ApiProvider } from '../providers/api/api';
 import { UserProvider } from '../providers/user/user';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { LoginPage } from '../pages/login/login';
+import { ServicoProvider } from '../providers/servico/servico';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { LoginPage } from '../pages/login/login';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiProvider,
-    UserProvider
+    UserProvider,
+    ServicoProvider
   ]
 })
 export class AppModule {}
