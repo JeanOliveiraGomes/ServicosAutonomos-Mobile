@@ -26,9 +26,9 @@
   
       <ion-item>
         <ion-label>Categoria</ion-label>
-        <ion-select [(ngModel)]="categoria" name="categoria">
-          <ion-option value="5b53e5917e6fd623b8d1f853">TI</ion-option>
-          <ion-option value="SrvicosGerais">Outros</ion-option>
+        <ion-select [(ngModel)]="servico.categoria.id" name="categoria">
+          <ion-option value="5b55e8a27f27ff335044c505">TI</ion-option>
+          <ion-option value="5b55e8a27f27ff335d044c505">Outros</ion-option>
         </ion-select>
       </ion-item>
      
@@ -38,7 +38,7 @@
 
     </ion-list>
   </form>
- {{categoria}}
+ {{servico.categoria.id}}
 
 
 </ion-content>

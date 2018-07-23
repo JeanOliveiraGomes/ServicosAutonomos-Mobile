@@ -16,9 +16,9 @@ export class ServicoProvider {
     console.log('Hello ServicoProvider Provider');
   }
 
-  cadastrar(categoriaId: string, servico: any){
+  cadastrar(servico: any){
     let headers = new HttpHeaders().set('Authorization', this.user.getAutorizationToken());
-    let requisicao = this.api.post('protected/anuncios/'+categoriaId , servico, {headers});
+    let requisicao = this.api.post('protected/anuncios', servico, {headers});
     return requisicao;
   }
 }

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { HomePage } from './../home/home';
 import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
@@ -37,6 +36,12 @@ export class CadastroPage {
        if(valido){
        this.user.cadastrar(this.account).subscribe((resp) => {
         this.navCtrl.push(HomePage);
+        let toast = this.toastCtrl.create({
+          message: 'Cadastrado com Sucesso',
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
       }, (err) => {
           
         // Unable to sign up

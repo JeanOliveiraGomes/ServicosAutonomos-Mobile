@@ -17,11 +17,12 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 })
 export class ServicoCadastroPage {
 
-  categoria: string = "";
 
-  servico: { titulo: string, descricao: string} = {
+
+servico: { titulo: string, descricao: string, categoria:{id:string}} = {
     titulo: null,
-    descricao: null
+    descricao: null,
+    categoria:{id: null}
   };
 
 
@@ -29,7 +30,7 @@ export class ServicoCadastroPage {
   }
   
 cadastrar(){
-  this.servicoProvider.cadastrar(this.categoria,this.servico).subscribe((data: any)=>{
+  this.servicoProvider.cadastrar(this.servico).subscribe((data: any)=>{
     let toast = this.toastCtrl.create({
     message: 'Anucnio Criado Com Sucesso',
     duration: 3000,
