@@ -17,7 +17,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 })
 export class ServicoCadastroPage {
 
-
+  arrayCategorias: Array<Categoria>;
 
 servico: { titulo: string, descricao: string, categoria:{id:string}} = {
     titulo: null,
@@ -27,8 +27,22 @@ servico: { titulo: string, descricao: string, categoria:{id:string}} = {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public servicoProvider: ServicoProvider, public toastCtrl: ToastController) {
-  }
+    this.getCategorias();
+   }
   
+getCategorias(){
+  this.servicoProvider.getCategorias().subscribe((data: any)=>{
+    this.arrayCategorias = data;
+  }, err =>{
+    let toastg = this.toastCtrl.create({
+    message: 'Falha ao Buscar Anuncios',
+    duration: 3000,
+    position: 'top'
+    });
+    toastg.present();
+    });
+}
+
 cadastrar(){
   this.servicoProvider.cadastrar(this.servico).subscribe((data: any)=>{
     let toast = this.toastCtrl.create({
@@ -48,4 +62,9 @@ toastg.present();
 });   
 }
 
+}
+
+export class Categoria {
+  id:string;
+  nome:string
 }

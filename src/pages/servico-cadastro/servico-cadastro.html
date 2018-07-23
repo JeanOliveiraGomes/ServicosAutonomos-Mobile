@@ -27,8 +27,7 @@
       <ion-item>
         <ion-label>Categoria</ion-label>
         <ion-select [(ngModel)]="servico.categoria.id" name="categoria">
-          <ion-option value="5b55e8a27f27ff335044c505">TI</ion-option>
-          <ion-option value="5b55e8a27f27ff335d044c505">Outros</ion-option>
+          <ion-option *ngFor="let categoria of arrayCategorias" value="{{categoria.id}}" >{{categoria.nome}}</ion-option>
         </ion-select>
       </ion-item>
      

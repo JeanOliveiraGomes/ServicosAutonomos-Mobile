@@ -21,4 +21,9 @@ export class ServicoProvider {
     let requisicao = this.api.post('protected/anuncios', servico, {headers});
     return requisicao;
   }
+
+  getCategorias(){
+    let requisicao = this.api.get('categorias');
+    return requisicao;
+  }
 }
