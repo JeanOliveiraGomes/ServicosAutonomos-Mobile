@@ -18,6 +18,8 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 export class CadastroPage {
 
 
+
+
   account: { nome: string, email: string, senha: string} = {
     nome: null,
     email: null,
