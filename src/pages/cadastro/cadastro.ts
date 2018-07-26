@@ -2,7 +2,9 @@ import { HomePage } from './../home/home';
 import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-
+import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { PasswordValidator } from '../../validators/password.validator';
+import emailMask from 'text-mask-addons/dist/emailMask';
 /**
  * Generated class for the CadastroPage page.
  *
@@ -17,67 +19,85 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 })
 export class CadastroPage {
 
+  validations_form: FormGroup;
+  matching_passwords_group: FormGroup;
+  emailMask = emailMask;
 
-
-
-  account: { nome: string, email: string, senha: string} = {
-    nome: null,
-    email: null,
-    senha: null
+  conta: { nome: string, email: string, senha: string } = {
+    nome: '',
+    email: '',
+    senha: ''
   };
 
-  senha2: string =null;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public user: UserProvider,
+    public toastCtrl: ToastController,
+    public formBuilder: FormBuilder
+  ) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public user :UserProvider, public toastCtrl: ToastController) {
+  }
+  ionViewWillLoad() {
+
+    this.matching_passwords_group = new FormGroup({
+      password: new FormControl('', Validators.compose([
+        Validators.minLength(8),
+        Validators.required,
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
+      ])),
+      confirm_password: new FormControl('', Validators.required)
+    }, (formGroup: FormGroup) => {
+      return PasswordValidator.areEqual(formGroup);
+    });
+
+    this.validations_form = this.formBuilder.group({
+      name: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
+      matching_passwords: this.matching_passwords_group,
+    });
   }
 
-  
-  cadastrar() {
-       // Attempt to login in through our User service
-       let valido = this.validarCredenciais();
-       if(valido){
-       this.user.cadastrar(this.account).subscribe((resp) => {
-        this.navCtrl.push(HomePage);
-        let toast = this.toastCtrl.create({
-          message: 'Cadastrado com Sucesso',
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
-      }, (err) => {
-          
-        // Unable to sign up
-        let toast = this.toastCtrl.create({
-          message: 'Erro ao cadastar',
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
-      });
-    }
-    }
+  validation_messages = {
+    'name': [
+      { type: 'required', message: 'Nome é obrigatório.' }
+    ],
+    'email': [
+      { type: 'required', message: 'Email é obrigatório.' },
+      { type: 'pattern', message: 'Entre com um email válido.' }
+    ],
+    'password': [
+      { type: 'required', message: 'Senha é obrigatório.' },
+      { type: 'minlength', message: 'Senha teve conter no minimo 8 caracteres.' },
+      { type: 'pattern', message: 'Sua senha deve conter no mínimo uma letra maiúscula, uma minúscula e 1 numero.' }
+    ],
+    'confirm_password': [
+      { type: 'required', message: 'Confirmação de senha é obrigatório.' }
+    ],
+    'matching_passwords': [
+      { type: 'areEqual', message: 'Senhas incompatíveis.' }
+    ],
+  };
 
-    validarCredenciais():boolean{
-      if(this.account.nome==null || this.account.email==null || this.account.senha==null || this.senha2==null){
-        let toastFieldsError = this.toastCtrl.create({
-          message: 'Preencha todos os campos',
-          duration: 3000,
-          position: 'top'
-        });
-        toastFieldsError.present();
-        return false;
-    }else if(this.account.senha != this.senha2){
-      let conflitoDeSenha = this.toastCtrl.create({
-        message: 'Erro, Senhas diferentes',
+  cadastra() {
+    this.conta.nome = this.validations_form.get('name').value
+    this.conta.email = this.validations_form.get('email').value
+    this.conta.senha = this.matching_passwords_group.get('password').value
+
+    this.user.cadastrar(this.conta).subscribe((resp) => {
+      this.navCtrl.push(HomePage);
+    }, (err) => {
+      let toast = this.toastCtrl.create({
+        message: 'Erro no servidor',
         duration: 3000,
         position: 'top'
       });
-      conflitoDeSenha.present();
-      return false;
-    
-    }else{
-      return true;
-    }
+      toast.present();
+    });
   }
 }
+
 

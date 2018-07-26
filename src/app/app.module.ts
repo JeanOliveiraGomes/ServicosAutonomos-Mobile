@@ -15,6 +15,7 @@ import { UserProvider } from '../providers/user/user';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { LoginPage } from '../pages/login/login';
 import { ServicoProvider } from '../providers/servico/servico';
+import { ValidatorsModule } from '../validators/validators.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ServicoProvider } from '../providers/servico/servico';
     HttpClientModule,
     CadastroPageModule,
     ServicoCadastroPageModule,
-    LoginPageModule
+    LoginPageModule,
+    ValidatorsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
