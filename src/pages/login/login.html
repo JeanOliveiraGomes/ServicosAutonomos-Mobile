@@ -23,7 +23,7 @@
         <div class="sepretor-or" padding-horizontal> <p>Or</p></div>
 
         <div padding class="container-bottom">
-            <form [formGroup]="validations_form" (submit)=logar(validations_form.value)>
+            <form [formGroup]="validations_form" (submit)=logar(loginData)>
                 
                     <div class="errormsg">
                         <div class="validation-errors">
@@ -34,8 +34,8 @@
                             </ng-container>
                           </div>
                           <div class="validation-errors">
-                              <ng-container *ngFor="let validation of validation_messages.password">
-                                <div class="error-message" *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+                              <ng-container *ngFor="let validation of validation_messages.senha">
+                                <div class="error-message" *ngIf="validations_form.get('senha').hasError(validation.type) && (validations_form.get('senha').dirty || validations_form.get('senha').touched)">
                                     <p>{{ validation.message }}</p>
                                 </div>
                               </ng-container>
@@ -48,7 +48,7 @@
                     <ion-label >
                         <ion-icon ios="ios-mail" md="md-mail"></ion-icon>
                     </ion-label>
-                    <ion-input required placeholder="Email *" [textMask]="emailMask" type="text" formControlName="email"></ion-input>
+                    <ion-input required placeholder="Email *" [(ngModel)]="loginData.email" [textMask]="emailMask" type="text" formControlName="email"></ion-input>
                   </ion-item>
                   
             
@@ -56,13 +56,13 @@
                     <ion-label>
                         <ion-icon ios="ios-unlock" md="md-unlock"></ion-icon>
                     </ion-label>
-                    <ion-input  required placeholder="Senha *" id="password" type="{{passwordtype}}" formControlName="password"></ion-input>
+                    <ion-input  required placeholder="Senha *" [(ngModel)]="loginData.senha" id="password" type="{{passwordtype}}" formControlName="senha"></ion-input>
                     <button ion-button clear class="eye-icon-btn" type="button" item-right (click)="managePassword()"><ion-icon name="{{passeye}}"></ion-icon></button>
                   </ion-item>
             
                 </ion-list>
                 
-                    <button ion-button full color="dark" [disabled]="!validations_form.valid" block>Sing In</button>
+                    <button ion-button full color="dark"  [disabled]="!validations_form.valid" block>Sing In</button>
                     <button ion-button full color="dark" (click)="goLogaSemServidor()">Logar Sem Servidor</button>
                     
                   

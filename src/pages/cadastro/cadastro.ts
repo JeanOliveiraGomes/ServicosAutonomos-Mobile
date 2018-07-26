@@ -2,7 +2,7 @@ import { HomePage } from './../home/home';
 import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormControl, FormGroup,AbstractControl } from '@angular/forms';
 import { PasswordValidator } from '../../validators/password.validator';
 import emailMask from 'text-mask-addons/dist/emailMask';
 /**
@@ -18,16 +18,17 @@ import emailMask from 'text-mask-addons/dist/emailMask';
   templateUrl: 'cadastro.html',
 })
 export class CadastroPage {
-
+  
+  cadastroData = { nome:'',email:'', senha:'' };
+  nome: AbstractControl;
+  email: AbstractControl;
+  senha: AbstractControl;
+  confirm_password: AbstractControl;
+  
   validations_form: FormGroup;
   matching_passwords_group: FormGroup;
   emailMask = emailMask;
 
-  conta: { nome: string, email: string, senha: string } = {
-    nome: '',
-    email: '',
-    senha: ''
-  };
 
   constructor(
     public navCtrl: NavController,
@@ -52,17 +53,22 @@ export class CadastroPage {
     });
 
     this.validations_form = this.formBuilder.group({
-      name: new FormControl('', Validators.required),
+      nome: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
       matching_passwords: this.matching_passwords_group,
     });
+
+    this.nome = this.validations_form.controls['nome'];
+    this.email = this.validations_form.controls['email'];
+    this.senha = this.matching_passwords_group.controls['password'];
+   
   }
 
   validation_messages = {
-    'name': [
+    'nome': [
       { type: 'required', message: 'Nome é obrigatório.' }
     ],
     'email': [
@@ -82,12 +88,11 @@ export class CadastroPage {
     ],
   };
 
-  cadastra() {
-    this.conta.nome = this.validations_form.get('name').value
-    this.conta.email = this.validations_form.get('email').value
-    this.conta.senha = this.matching_passwords_group.get('password').value
+  cadastra(cadastroData) {
+    
+    console.log(cadastroData)
 
-    this.user.cadastrar(this.conta).subscribe((resp) => {
+    this.user.cadastrar(JSON.stringify(cadastroData)).subscribe((resp) => {
       this.navCtrl.push(HomePage);
     }, (err) => {
       let toast = this.toastCtrl.create({

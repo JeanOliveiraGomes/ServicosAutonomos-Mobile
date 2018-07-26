@@ -14,22 +14,22 @@
 
 
 <ion-content padding>
-    <form [formGroup]="validations_form" (submit)=cadastra(validations_form.value)>
+    <form [formGroup]="validations_form" (submit)=cadastra(cadastroData)>
         <ion-list>
             <ion-item>
                 <ion-label floating color="primary">Nome</ion-label>
-                <ion-input type="text" formControlName="name"></ion-input>
+                <ion-input type="text"  [(ngModel)]="cadastroData.nome" formControlName="nome"></ion-input>
               </ion-item>
               <div class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.name">
-                  <div class="error-message" *ngIf="validations_form.get('name').hasError(validation.type) && (validations_form.get('name').dirty || validations_form.get('name').touched)">
+                <ng-container *ngFor="let validation of validation_messages.nome">
+                  <div class="error-message" *ngIf="validations_form.get('nome').hasError(validation.type) && (validations_form.get('nome').dirty || validations_form.get('nome').touched)">
                     {{ validation.message }}
                   </div>
                 </ng-container>
               </div>
               <ion-item>
                   <ion-label floating color="primary">Email</ion-label>
-                  <ion-input [textMask]="emailMask" type="text" formControlName="email"></ion-input>
+                  <ion-input [textMask]="emailMask" type="text" [(ngModel)]="cadastroData.email" formControlName="email"></ion-input>
                 </ion-item>
                 <div class="validation-errors">
                   <ng-container *ngFor="let validation of validation_messages.email">
@@ -41,7 +41,7 @@
                 <div formGroupName="matching_passwords">
                     <ion-item>
                       <ion-label floating color="primary">Senha</ion-label>
-                      <ion-input type="password" formControlName="password"></ion-input>
+                      <ion-input type="password" [(ngModel)]="cadastroData.senha" formControlName="password"></ion-input>
                     </ion-item>
                     <div class="validation-errors">
                       <ng-container *ngFor="let validation of validation_messages.password">
@@ -53,7 +53,7 @@
               
                     <ion-item>
                       <ion-label floating color="primary">Confirme Senha</ion-label>
-                      <ion-input type="password" formControlName="confirm_password"></ion-input>
+                      <ion-input type="password"  formControlName="confirm_password"></ion-input>
                     </ion-item>
                     <div class="validation-errors">
                       <ng-container *ngFor="let validation of validation_messages.confirm_password">

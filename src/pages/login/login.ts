@@ -2,7 +2,7 @@ import { HomePage } from './../home/home';
 import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormControl, FormGroup,AbstractControl } from '@angular/forms';
 import emailMask from 'text-mask-addons/dist/emailMask';
 import { CadastroPage } from '../cadastro/cadastro';
 
@@ -20,15 +20,16 @@ import { CadastroPage } from '../cadastro/cadastro';
 })
 export class LoginPage {
   
+  loginData = { email:'', senha:'' };
+	email: AbstractControl;
+  senha: AbstractControl;
+  
   validations_form: FormGroup;
   emailMask = emailMask;
   passwordtype:string='password';
   passeye:string ='eye';
 
-  credenciais: {email: string , senha: string}= {
-    email: '',
-    senha: ''
-  };
+  
   constructor(
 
               public navCtrl: NavController, 
@@ -47,12 +48,15 @@ export class LoginPage {
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      password: new FormControl('', Validators.compose([
+      senha: new FormControl('', Validators.compose([
         Validators.minLength(8),
         Validators.required,
         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
       ])),
     });
+
+    this.email = this.validations_form.controls['email'];
+    this.senha = this.validations_form.controls['senha'];
   }
 
   validation_messages = {
@@ -60,7 +64,7 @@ export class LoginPage {
       { type: 'required', message: 'Email é obrigatório.' },
       { type: 'pattern',  message: 'Entre com um email válido.' }
     ],
-    'password': [
+    'senha': [
       { type: 'required',   message:  'Senha é obrigatório.' },
       { type: 'minlength',  message:  'Senha teve conter no minimo 8 caracteres.' },
       { type: 'pattern',    message:  'Sua senha deve conter no mínimo uma letra maiúscula, uma minúscula e 1 numero.' }
@@ -84,13 +88,9 @@ export class LoginPage {
     }
   }
 
-  logar(){
-    
-    this.credenciais.email = this.validations_form.get('email').value
-    this.credenciais.senha = this.validations_form.get('password').value
-    console.log(this.credenciais)
-
-    this.user.login(this.credenciais).subscribe((data: any)=>{
+  logar(loginData){
+    console.log(loginData)
+    this.user.login(loginData).subscribe((data: any)=>{
           this.navCtrl.push(HomePage);
     }, err =>{
       let toastg = this.toastCtrl.create({
@@ -99,7 +99,7 @@ export class LoginPage {
       position: 'top'
       });
     toastg.present();
-    });   
+    });  
   }
 
 }

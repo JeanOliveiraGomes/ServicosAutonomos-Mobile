@@ -1,5 +1,3 @@
-import { LoginPage } from './../login/login';
-import { CadastroPage } from './../cadastro/cadastro';
 import { ServicoCadastroPage } from './../servico-cadastro/servico-cadastro';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
