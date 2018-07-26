@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import emailMask from 'text-mask-addons/dist/emailMask';
+import { CadastroPage } from '../cadastro/cadastro';
 
 /**
  * Generated class for the LoginPage page.
@@ -21,6 +22,8 @@ export class LoginPage {
   
   validations_form: FormGroup;
   emailMask = emailMask;
+  passwordtype:string='password';
+  passeye:string ='eye';
 
   credenciais: {email: string , senha: string}= {
     email: '',
@@ -63,6 +66,23 @@ export class LoginPage {
       { type: 'pattern',    message:  'Sua senha deve conter no mínimo uma letra maiúscula, uma minúscula e 1 numero.' }
     ]
   };
+
+  goCadastrar(){
+    this.navCtrl.push(CadastroPage);
+  }
+  goLogaSemServidor(){
+   
+      this.navCtrl.push(HomePage);
+  }
+  managePassword() {
+    if(this.passwordtype == 'password'){
+      this.passwordtype='text';
+      this.passeye='eye-off';
+    }else{
+      this.passwordtype='password';
+      this.passeye = 'eye';
+    }
+  }
 
   logar(){
     

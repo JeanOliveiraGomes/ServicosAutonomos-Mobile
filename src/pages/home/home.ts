@@ -17,10 +17,5 @@ export class HomePage {
   goCadastrarServico(){
     this.navCtrl.push(ServicoCadastroPage);
   }
-  goCadastro(){
-    this.navCtrl.push(CadastroPage);
-  }
-  goLogin(){
-    this.navCtrl.push(LoginPage);
-  }
+  
 }
