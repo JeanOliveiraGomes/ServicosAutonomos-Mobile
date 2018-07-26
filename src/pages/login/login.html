@@ -14,17 +14,33 @@
 
 
 <ion-content padding>
-  <form (submit)="logar()">
+  <form [formGroup]="validations_form" (submit)=logar(validations_form.value)>
     <ion-list>
 
       <ion-item>
-        <ion-label fixed>Email</ion-label>
-        <ion-input type="email" [(ngModel)]="credenciais.email" name="email"></ion-input>
+        <ion-label floating color="primary">Email</ion-label>
+        <ion-input [textMask]="emailMask" type="text" formControlName="email"></ion-input>
       </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div class="error-message" *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
       <ion-item>
-        <ion-label fixed>Senha:</ion-label>
-        <ion-input type="password" [(ngModel)]="credenciais.senha" name="senha"></ion-input>
+        <ion-label floating color="primary">Senha</ion-label>
+        <ion-input  type="password" formControlName="password"></ion-input>
       </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.password">
+          <div class="error-message" *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      
 
       <div padding>
         <button ion-button color="primary" block>Logar</button>
