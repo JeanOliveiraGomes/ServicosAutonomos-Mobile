@@ -44,11 +44,11 @@ export class LoginPage {
   ionViewWillLoad() {
 
     this.validations_form = this.formBuilder.group({
-      email: new FormControl('', Validators.compose([
+      email: new FormControl('teste40@teste40.com', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      senha: new FormControl('', Validators.compose([
+      senha: new FormControl('Teste4040', Validators.compose([
         Validators.minLength(8),
         Validators.required,
         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')

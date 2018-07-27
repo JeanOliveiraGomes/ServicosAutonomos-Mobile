@@ -7,11 +7,44 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the
-    <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+ 
   <button ion-button full (click)="goCadastrarServico()">Cadastro de Servico</button>
+
+  <ion-card *ngFor="let anuncio of lista_anuncios">
+      
+    <ion-item>
+          <ion-avatar item-start>
+            <img src="assets/imgs/ALISSON.jpg">
+          </ion-avatar>
+          <h2> {{anuncio.anunciante.nome}}</h2>
+          <p>{{anuncio.anunciante.email}}</p>
+        </ion-item>
+    <ion-card-header>
+      {{anuncio.titulo}}
+    </ion-card-header>
+    <ion-card-content>
+      {{anuncio.descricao}}
+
+      <ion-row>
+          <ion-col>
+            <button ion-button icon-start clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div>Ver </div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-start  >
+              <ion-icon name="ios-call-outline"></ion-icon>
+              <div>Contato</div>
+            </button>
+          </ion-col>
+          <ion-col center text-center>
+            <ion-note>
+              25/09/2018 11:40h
+            </ion-note>
+          </ion-col>
+        </ion-row>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

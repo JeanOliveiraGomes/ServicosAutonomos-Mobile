@@ -22,6 +22,19 @@ export class ServicoProvider {
     return requisicao;
   }
 
+  buscaPorTitulo(busca: any){
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    let requisicao = this.api.get('protected/anuncios/busca/', busca, {headers});
+
+    return requisicao;
+  }
+  listaAnuncios(){
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    let requisicao = this.api.get('protected/anuncios', {headers});
+
+    return requisicao;
+  }
+
   getCategorias(){
     let requisicao = this.api.get('categorias');
     return requisicao;
