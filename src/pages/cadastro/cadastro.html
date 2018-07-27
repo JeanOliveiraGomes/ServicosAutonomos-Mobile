@@ -1,91 +1,100 @@
-<!--
-  Generated template for the CadastroPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>Cadastro</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-    <form [formGroup]="validations_form" (submit)=cadastra(cadastroData)>
-        <ion-list>
-            <ion-item>
-                <ion-label floating color="primary">Nome</ion-label>
-                <ion-input type="text"  [(ngModel)]="cadastroData.nome" formControlName="nome"></ion-input>
-              </ion-item>
-              <div class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.nome">
-                  <div class="error-message" *ngIf="validations_form.get('nome').hasError(validation.type) && (validations_form.get('nome').dirty || validations_form.get('nome').touched)">
-                    {{ validation.message }}
-                  </div>
-                </ng-container>
+<ion-content class="bg-img">
+  <div class="main-content">
+    <div padding style="width: 100%;">
+      <form [formGroup]="validations_form" (submit)=cadastra(cadastroData)>
+        <div class="errormsg">
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.nome">
+              <div class="error-message" *ngIf="validations_form.get('nome').hasError(validation.type) && (validations_form.get('nome').dirty || validations_form.get('nome').touched)">
+                <p>{{ validation.message }}</p>
               </div>
-              <ion-item>
-                  <ion-label floating color="primary">Email</ion-label>
-                  <ion-input [textMask]="emailMask" type="text" [(ngModel)]="cadastroData.email" formControlName="email"></ion-input>
-                </ion-item>
-                <div class="validation-errors">
-                  <ng-container *ngFor="let validation of validation_messages.email">
-                    <div class="error-message" *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
-                      {{ validation.message }}
-                    </div>
-                  </ng-container>
-                </div>
-                <div formGroupName="matching_passwords">
-                    <ion-item>
-                      <ion-label floating color="primary">Senha</ion-label>
-                      <ion-input type="password" [(ngModel)]="cadastroData.senha" formControlName="password"></ion-input>
-                    </ion-item>
-                    <div class="validation-errors">
-                      <ng-container *ngFor="let validation of validation_messages.password">
-                        <div class="error-message" *ngIf="validations_form.get('matching_passwords').get('password').hasError(validation.type) && (validations_form.get('matching_passwords').get('password').dirty || validations_form.get('matching_passwords').get('password').touched)">
-                          {{ validation.message }}
-                        </div>
-                      </ng-container>
-                    </div>
-              
-                    <ion-item>
-                      <ion-label floating color="primary">Confirme Senha</ion-label>
-                      <ion-input type="password"  formControlName="confirm_password"></ion-input>
-                    </ion-item>
-                    <div class="validation-errors">
-                      <ng-container *ngFor="let validation of validation_messages.confirm_password">
-                        <div class="error-message" *ngIf="validations_form.get('matching_passwords').get('confirm_password').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty || validations_form.get('matching_passwords').get('confirm_password').touched)">
-                          {{ validation.message }}
-                        </div>
-                      </ng-container>
-                    </div>
-                  </div>
-                  <!-- These validations are for the form group -->
-                  <div class="validation-errors">
-                    <ng-container *ngFor="let validation of validation_messages.matching_passwords">
-                      <div class="error-message" *ngIf="validations_form.get('matching_passwords').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty || validations_form.get('matching_passwords').get('confirm_password').touched)">
-                        {{ validation.message }}
-                      </div>
-                    </ng-container>
-                  </div>
-          
-    
-
-          
-
-          
-           <!-- These validations are for the form group -->
-    
-          <div padding>
-            <button ion-button color="primary" block >Registrar</button>
+            </ng-container>
           </div>
-    
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.email">
+              <div class="error-message" *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+                <p>{{ validation.message }}</p>
+              </div>
+            </ng-container>
+          </div>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.password">
+              <div class="error-message" *ngIf="validations_form.get('matching_passwords').get('password').hasError(validation.type) && (validations_form.get('matching_passwords').get('password').dirty || validations_form.get('matching_passwords').get('password').touched)">
+                <p>{{ validation.message }}</p>
+              </div>
+            </ng-container>
+          </div>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.confirm_password">
+              <div class="error-message" *ngIf="validations_form.get('matching_passwords').get('confirm_password').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty || validations_form.get('matching_passwords').get('confirm_password').touched)">
+                <p>{{ validation.message }}</p>
+              </div>
+            </ng-container>
+          </div>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.matching_passwords">
+              <div class="error-message" *ngIf="validations_form.get('matching_passwords').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty || validations_form.get('matching_passwords').get('confirm_password').touched)">
+                <p>{{ validation.message }}</p>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <ion-list>
+          <ion-item padding-right>
+            <ion-label>
+              <ion-icon ios="ios-person" md="md-person"></ion-icon>
+            </ion-label>
+            <ion-input   type="text" [(ngModel)]="cadastroData.nome" formControlName="nome" required placeholder="Nome *"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+            </ion-label>
+            <ion-input  [textMask]="emailMask" type="text" [(ngModel)]="cadastroData.email" formControlName="email" type="text" required
+              placeholder="Email *"></ion-input>
+          </ion-item>
+          <div formGroupName="matching_passwords">
+            <ion-item>
+              <ion-label>
+                <ion-icon ios="ios-unlock" md="md-unlock"></ion-icon>
+              </ion-label>
+              <ion-input  [(ngModel)]="cadastroData.senha" formControlName="password" type="{{passwordtype}}" required placeholder="Senha *"></ion-input>
+              <button ion-button clear class="eye-icon-btn" type="button" item-right (click)="managePassword()">
+                <ion-icon name="{{passeye}}"></ion-icon>
+              </button>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <ion-icon ios="ios-unlock" md="md-unlock"></ion-icon>
+              </ion-label>
+              <ion-input  formControlName="confirm_password" type="{{cnfpasswordtype}}" required placeholder="Confirma senha *"></ion-input>
+              <button ion-button clear class="eye-icon-btn" type="button" item-right (click)="managecnfPassword()">
+                <ion-icon name="{{cnfpasseye}}"></ion-icon>
+              </button>
+            </ion-item>
+          </div>
         </ion-list>
+        <button ion-button full color="dark" [disabled]="!validations_form.valid" (click)="doRegister(regData)">Registra</button>
       </form>
+      <div class="sepretor-or" padding-horizontal>
+        <p>Or</p>
+      </div>
+      <div padding text-center class="form-bottom-text">
+        <label>Cadastre-se com </label>
+      </div>
+      <div text-center class="socialLogin" padding>
+        <button ion-button class="google">
+          <ion-icon name="logo-google" style="margin-right: 12px;"></ion-icon>Google</button>
+        <button ion-button class="facebook">
+          <ion-icon name="logo-facebook" style="margin-right: 12px;"></ion-icon> Facebook</button>
+      </div>
+      <div padding text-center class="form-bottom-text">
+        <label> Já tem uma conta?
+          <a href="javascript:void(0);" (click)="moveToLogin()"> Entre agora </a>
+        </label>
+      </div>
 
-      
 
+    </div>
+  </div>
 </ion-content>

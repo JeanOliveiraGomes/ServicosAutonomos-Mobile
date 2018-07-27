@@ -89,7 +89,6 @@ export class LoginPage {
   }
 
   logar(loginData){
-    console.log(loginData)
     this.user.login(loginData).subscribe((data: any)=>{
           this.navCtrl.push(HomePage);
     }, err =>{

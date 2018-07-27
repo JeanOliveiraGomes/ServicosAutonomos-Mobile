@@ -2,9 +2,10 @@ import { HomePage } from './../home/home';
 import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { Validators, FormBuilder, FormControl, FormGroup,AbstractControl } from '@angular/forms';
+import { Validators, FormBuilder, FormControl, FormGroup, AbstractControl } from '@angular/forms';
 import { PasswordValidator } from '../../validators/password.validator';
 import emailMask from 'text-mask-addons/dist/emailMask';
+import { LoginPage } from '../login/login';
 /**
  * Generated class for the CadastroPage page.
  *
@@ -18,16 +19,21 @@ import emailMask from 'text-mask-addons/dist/emailMask';
   templateUrl: 'cadastro.html',
 })
 export class CadastroPage {
-  
-  cadastroData = { nome:'',email:'', senha:'' };
+
+  cadastroData = { nome: '', email: '', senha: '' };
   nome: AbstractControl;
   email: AbstractControl;
   senha: AbstractControl;
   confirm_password: AbstractControl;
-  
+
   validations_form: FormGroup;
   matching_passwords_group: FormGroup;
   emailMask = emailMask;
+
+  passwordtype: string = 'password';
+  cnfpasswordtype: string = 'password';
+  cnfpasseye: string = 'eye';
+  passeye: string = 'eye';
 
 
   constructor(
@@ -64,7 +70,7 @@ export class CadastroPage {
     this.nome = this.validations_form.controls['nome'];
     this.email = this.validations_form.controls['email'];
     this.senha = this.matching_passwords_group.controls['password'];
-   
+
   }
 
   validation_messages = {
@@ -88,8 +94,30 @@ export class CadastroPage {
     ],
   };
 
+  managePassword() {
+    if (this.passwordtype == 'password') {
+      this.passwordtype = 'text';
+      this.passeye = 'eye-off';
+    } else {
+      this.passwordtype = 'password';
+      this.passeye = 'eye';
+    }
+  }
+  managecnfPassword() {
+    if (this.cnfpasswordtype == 'password') {
+      this.cnfpasswordtype = 'text';
+      this.cnfpasseye = 'eye-off';
+    } else {
+      this.cnfpasswordtype = 'password';
+      this.cnfpasseye = 'eye';
+    }
+  }
+
+  moveToLogin() {
+    this.navCtrl.push(LoginPage);
+  }
   cadastra(cadastroData) {
-    
+
     console.log(cadastroData)
 
     this.user.cadastrar(JSON.stringify(cadastroData)).subscribe((resp) => {
