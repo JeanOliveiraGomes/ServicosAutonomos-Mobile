@@ -2,13 +2,14 @@ import { ServicoCadastroPage } from './../servico-cadastro/servico-cadastro';
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 import { ServicoProvider } from '../../providers/servico/servico';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  
   public objeto_feed = {
     titulo:"",
     descricao:"",
@@ -23,7 +24,7 @@ export class HomePage {
   public lista_anuncios = new Array<any>();
 
   constructor(public navCtrl: NavController,  public servicoProvider: ServicoProvider,public toastCtrl: ToastController) {
-
+    
   }
 
   ionViewWillLoad() {

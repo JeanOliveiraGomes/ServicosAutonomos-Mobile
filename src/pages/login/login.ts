@@ -1,7 +1,7 @@
 import { HomePage } from './../home/home';
 import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController,MenuController } from 'ionic-angular';
 import { Validators, FormBuilder, FormControl, FormGroup,AbstractControl } from '@angular/forms';
 import emailMask from 'text-mask-addons/dist/emailMask';
 import { CadastroPage } from '../cadastro/cadastro';
@@ -32,7 +32,8 @@ export class LoginPage {
   
   constructor(
 
-              public navCtrl: NavController, 
+              public navCtrl: NavController,
+              public menu: MenuController, 
               public navParams: NavParams, 
               public user: UserProvider,
               public toastCtrl:ToastController,
@@ -75,8 +76,14 @@ export class LoginPage {
     this.navCtrl.push(CadastroPage);
   }
   goLogaSemServidor(){
-   
-      this.navCtrl.push(HomePage);
+      this.navCtrl.setRoot(HomePage)
+      //this.navCtrl.push(HomePage);
+  }
+  ionViewDidEnter(){
+    this.menu.enable(false);
+  }
+  ionViewWillLeave(){
+    this.menu.enable(true);
   }
   managePassword() {
     if(this.passwordtype == 'password'){
@@ -90,7 +97,7 @@ export class LoginPage {
 
   logar(loginData){
     this.user.login(loginData).subscribe((data: any)=>{
-          this.navCtrl.push(HomePage);
+      this.navCtrl.setRoot(HomePage)
     }, err =>{
       let toastg = this.toastCtrl.create({
       message: 'Erro no servidor',
