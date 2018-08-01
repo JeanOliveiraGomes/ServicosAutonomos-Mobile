@@ -51,7 +51,7 @@ cadastrar(){
     position: 'top'
   });
   toast.present();
-  this.navCtrl.push(HomePage);
+  this.navCtrl.setRoot(HomePage)
 }, err =>{
 let toastg = this.toastCtrl.create({
 message: 'Falha ao criar Anuncio',

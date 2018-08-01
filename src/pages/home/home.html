@@ -1,31 +1,39 @@
-
 <ion-header>
-  <ion-navbar >
-    <ion-buttons start>
-      <button ion-button icon-only menuToggle>
+
+  <ion-navbar>
+
+    <ion-searchbar [(ngModel)]="queryText" *ngIf="buscaTitulo" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="buscaTitulo=false"></ion-searchbar>
+    <ion-buttons>
+      <button *ngIf="!buscaTitulo" ion-button icon-only menuToggle>
         <ion-icon name="menu"></ion-icon>
-
       </button>
-
     </ion-buttons>
-    
+    <ion-buttons end>
+      <button ion-button icon-only *ngIf="!buscaTitulo" (click)="buscaTitulo=true">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+
+
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
- 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <button ion-button full (click)="goCadastrarServico()">Cadastro de Servico</button>
 
   <ion-card *ngFor="let anuncio of lista_anuncios">
-      
+
     <ion-item>
-          <ion-avatar item-start>
-            <img src="assets/imgs/ALISSON.jpg">
-          </ion-avatar>
-          <h2> {{anuncio.anunciante.nome}}</h2>
-          <p>{{anuncio.anunciante.email}}</p>
-        </ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/ALISSON.jpg">
+      </ion-avatar>
+      <h2> {{anuncio.anunciante.nome}}</h2>
+    </ion-item>
     <ion-card-header>
       {{anuncio.titulo}}
     </ion-card-header>
@@ -33,24 +41,25 @@
       {{anuncio.descricao}}
 
       <ion-row>
-          <ion-col>
-            <button ion-button icon-start>
-              <ion-icon name="thumbs-up"></ion-icon>
-              <div>Ver </div>
-            </button>
-          </ion-col>
-          <ion-col>
-            <button ion-button icon-start  >
-              <ion-icon name="ios-call-outline"></ion-icon>
-              <div>Contato</div>
-            </button>
-          </ion-col>
-          <ion-col center text-center>
-            <ion-note>
-             <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="anuncio.dataHora" ></ion-datetime>>
-            </ion-note>
-          </ion-col>
-        </ion-row>
+        <ion-col>
+          <button ion-button icon-start>
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>Ver </div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-start>
+            <ion-icon name="ios-call-outline"></ion-icon>
+            <div>Contato</div>
+          </button>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-note>
+            <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="anuncio.dataHora"></ion-datetime>
+          </ion-note>
+        </ion-col>
+
+      </ion-row>
     </ion-card-content>
   </ion-card>
 

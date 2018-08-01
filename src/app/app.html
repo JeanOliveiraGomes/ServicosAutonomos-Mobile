@@ -1,25 +1,25 @@
 <ion-menu [content]="content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menu</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <ion-list>
-        <button ion-item (click)="openPage(homePage)">
-          Serviços
-        </button>
-        <button ion-item (click)="openPage(friendsPage)">
-          Busca pessoas
-        </button>
-        <button ion-item (click)="openPage(eventsPage)">
-          Chat
-        </button>
-        <button ion-item (click)="closeMenu()">
-          Minha conta
-        </button>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
-  
-  <ion-nav id="nav" #content [root]="rootPage"></ion-nav>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item>
+        Serviços
+      </button>
+      <button ion-item>
+        Busca pessoas
+      </button>
+      <button ion-item>
+        Chat
+      </button>
+      <button ion-item>
+        Minha conta
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav id="nav" #content [root]="rootPage"></ion-nav>

@@ -98,13 +98,24 @@ export class LoginPage {
   logar(loginData){
     this.user.login(loginData).subscribe((data: any)=>{
       this.navCtrl.setRoot(HomePage)
-    }, err =>{
-      let toastg = this.toastCtrl.create({
-      message: 'Erro no servidor',
-      duration: 3000,
-      position: 'top'
-      });
-    toastg.present();
+    }, error =>{
+      if(error.status == 401){
+        let toastg = this.toastCtrl.create({
+          message: 'Email ou senha está incorreto, ou você não tem permissões.',
+          duration: 3000,
+          position: 'top'
+          });
+        toastg.present();
+        
+      }else{
+        let toastg = this.toastCtrl.create({
+          message: 'Erro no servidor.',
+          duration: 3000,
+          position: 'top'
+          });
+        toastg.present();
+      }
+      
     });  
   }
 

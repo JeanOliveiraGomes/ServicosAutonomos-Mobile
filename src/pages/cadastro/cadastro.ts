@@ -117,20 +117,27 @@ export class CadastroPage {
     this.navCtrl.push(LoginPage);
   }
   cadastra(cadastroData) {
-
-    console.log(cadastroData)
-
     this.user.cadastrar(JSON.stringify(cadastroData)).subscribe((resp) => {
       this.navCtrl.push(HomePage);
-    }, (err) => {
-      let toast = this.toastCtrl.create({
-        message: 'Erro no servidor',
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+    }, (error) => {
+      if(error.status == 500){
+        let toast = this.toastCtrl.create({
+          message: 'Este email já é cadastrado.',
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      }else{
+        let toast = this.toastCtrl.create({
+          message: 'Erro no servidor',
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      }
+      
     });
-  }
+  };
 }
 
 

@@ -22,9 +22,9 @@ export class ServicoProvider {
     return requisicao;
   }
 
-  buscaPorTitulo(busca: any){
+  buscaPorTitulo(busca){
     let headers = new HttpHeaders().set('Content-Type','application/json');
-    let requisicao = this.api.get('protected/anuncios/busca/', busca, {headers});
+    let requisicao = this.api.get('protected/anuncios/busca/'+ busca, {headers});
 
     return requisicao;
   }
