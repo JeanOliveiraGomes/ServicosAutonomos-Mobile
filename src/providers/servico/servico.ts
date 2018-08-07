@@ -16,6 +16,12 @@ export class ServicoProvider {
     console.log('Hello ServicoProvider Provider');
   }
 
+  candidatar( servicoId: string){
+    let headers = new HttpHeaders().set('Authorization', this.user.getAutorizationToken());
+    let requisicao = this.api.put('protected/anuncios', servicoId, {headers});
+    return requisicao;
+  }
+
   cadastrar(servico: any){
     let headers = new HttpHeaders().set('Authorization', this.user.getAutorizationToken());
     let requisicao = this.api.post('protected/anuncios', servico, {headers});

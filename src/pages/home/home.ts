@@ -27,6 +27,24 @@ export class HomePage {
   ) { };
 
 
+  candidatar(idServico: string){
+    this.servicoProvider.candidatar(idServico).subscribe((data: any)=>{
+      let toastg = this.toastCtrl.create({
+        message: 'Parabens, candidatura efetuada com sucesso',
+        duration: 3000,
+        position: 'top'
+        });
+        toastg.present();
+    }, err =>{
+      let toastg = this.toastCtrl.create({
+      message: 'Falha ao se candidatar',
+      duration: 3000,
+      position: 'top'
+      });
+      toastg.present();
+      });
+       
+  }
   doRefresh(refresher) {
 
     this.refresher = refresher;
