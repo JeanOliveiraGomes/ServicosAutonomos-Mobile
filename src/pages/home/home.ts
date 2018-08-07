@@ -37,7 +37,7 @@ export class HomePage {
         toastg.present();
     }, err =>{
       let toastg = this.toastCtrl.create({
-      message: 'Falha ao se candidatar',
+      message: 'Você ja é candidato ou é dono deste serviço!',
       duration: 3000,
       position: 'top'
       });
