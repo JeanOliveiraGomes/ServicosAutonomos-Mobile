@@ -50,7 +50,7 @@ export class LoginPage {
     this.validations_form = this.formBuilder.group({
       email: new FormControl('teste40@teste40.com', Validators.compose([
         Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+        Validators.pattern('^[a-zA-Z0-9_.+-]+[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
       senha: new FormControl('Teste4040', Validators.compose([
         Validators.minLength(8),
