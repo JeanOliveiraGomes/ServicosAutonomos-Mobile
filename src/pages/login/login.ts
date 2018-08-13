@@ -127,12 +127,14 @@ export class LoginPage {
   LoginAutomatico(){
     this.storage.get('loginData')    
     .then((data : any) => {
+      if(data != null){
       this.user.login(data).subscribe((data: any)=>{
         this.navCtrl.setRoot(HomePage)
       }, 
       error =>{  });
 
-    })
+    }
+  })
     .catch(() => {
         
     });
