@@ -16,22 +16,8 @@ export class ApiProvider {
     console.log('Hello ApiProvider Provider');
   }
 
-  get(endpoint: string, params?: any, reqOpts?: any) {
-    if (!reqOpts) {
-      reqOpts = {
-        params: new HttpParams()
-      };
-    }
-
-    // Support easy query params for GET requests
-    if (params) {
-      reqOpts.params = new HttpParams();
-      for (let k in params) {
-        reqOpts.params = reqOpts.params.set(k, params[k]);
-      }
-    }
-
-    return this.http.get(this.url + '/' + endpoint, reqOpts);
+  get(endpoint: string,  header: any) {
+    return this.http.get(this.url + '/' + endpoint, header);
   }
 
   post(endpoint: string, body: any, header: any) {

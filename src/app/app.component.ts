@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { Page } from '../../node_modules/ionic-angular/umd/navigation/nav-util';
+import { MeusServicosPage } from '../pages/meus-servicos/meus-servicos';
 @Component({
   templateUrl: 'app.html'
 })
@@ -31,5 +32,8 @@ export class MyApp {
 logout(){
   this.userProvider.logout();
   this.pushPage(LoginPage);
+}
+meusServicos(){
+  this.pushPage(MeusServicosPage);
 }
 }

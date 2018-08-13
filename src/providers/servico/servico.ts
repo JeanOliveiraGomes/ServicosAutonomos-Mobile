@@ -16,33 +16,47 @@ export class ServicoProvider {
     console.log('Hello ServicoProvider Provider');
   }
 
+  headerComAuthenticacao(){
+    let headers = new HttpHeaders().append('Authorization', this.user.getAutorizationToken());
+    return headers;
+  }
+
   candidatar( servicoId: string){
-    let headers = new HttpHeaders().set('Authorization', this.user.getAutorizationToken());
+    let headers = this.headerComAuthenticacao();
     let requisicao = this.api.put('protected/anuncios', servicoId, {headers});
     return requisicao;
   }
 
   cadastrar(servico: any){
-    let headers = new HttpHeaders().set('Authorization', this.user.getAutorizationToken());
+    let headers = this.headerComAuthenticacao();
     let requisicao = this.api.post('protected/anuncios', servico, {headers});
     return requisicao;
   }
 
   buscaPorTitulo(busca){
-    let headers = new HttpHeaders().set('Content-Type','application/json');
+    let headers = this.headerComAuthenticacao();
     let requisicao = this.api.get('protected/anuncios/busca/'+ busca, {headers});
 
     return requisicao;
   }
   listaAnuncios(){
-    let headers = new HttpHeaders().set('Content-Type','application/json');
+    let headers = this.headerComAuthenticacao();
     let requisicao = this.api.get('protected/anuncios', {headers});
 
     return requisicao;
   }
 
   getCategorias(){
-    let requisicao = this.api.get('categorias');
+    let headers = this.headerComAuthenticacao();
+    let requisicao = this.api.get('categorias', {headers});
     return requisicao;
   }
+
+  getMeusServicos(){
+    let headers = this.headerComAuthenticacao();
+    let requisicao = this.api.get('protected/anuncios/meus-anuncios', {headers});
+    return requisicao;
+  }
+
+
 }

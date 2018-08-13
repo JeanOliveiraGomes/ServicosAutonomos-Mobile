@@ -1,3 +1,4 @@
+import { MeusServicosPageModule } from './../pages/meus-servicos/meus-servicos.module';
 import { LoginPageModule } from './../pages/login/login.module';
 import { ServicoCadastroPageModule } from './../pages/servico-cadastro/servico-cadastro.module';
 import { ServicoCadastroPage } from './../pages/servico-cadastro/servico-cadastro';
@@ -17,6 +18,7 @@ import { LoginPage } from '../pages/login/login';
 import { ServicoProvider } from '../providers/servico/servico';
 import { ValidatorsModule } from '../validators/validators.module';
 import { IonicStorageModule } from '@ionic/storage';
+import { MeusServicosPage } from '../pages/meus-servicos/meus-servicos';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { IonicStorageModule } from '@ionic/storage';
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     CadastroPageModule,
+    MeusServicosPageModule,
     ServicoCadastroPageModule,
     LoginPageModule,
     ValidatorsModule,
@@ -39,7 +42,8 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     CadastroPage,
     ServicoCadastroPage,
-    LoginPage
+    LoginPage,
+    MeusServicosPage
   ],
   providers: [
     StatusBar,
