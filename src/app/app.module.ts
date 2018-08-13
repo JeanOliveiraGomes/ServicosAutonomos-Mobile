@@ -16,6 +16,7 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { LoginPage } from '../pages/login/login';
 import { ServicoProvider } from '../providers/servico/servico';
 import { ValidatorsModule } from '../validators/validators.module';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ValidatorsModule } from '../validators/validators.module';
     CadastroPageModule,
     ServicoCadastroPageModule,
     LoginPageModule,
-    ValidatorsModule
+    ValidatorsModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

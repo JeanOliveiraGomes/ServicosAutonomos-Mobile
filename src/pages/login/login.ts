@@ -1,3 +1,4 @@
+import { IonicStorageModule } from '@ionic/storage';
 import { HomePage } from './../home/home';
 import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
@@ -5,6 +6,7 @@ import { IonicPage, NavController, NavParams, ToastController,MenuController } f
 import { Validators, FormBuilder, FormControl, FormGroup,AbstractControl } from '@angular/forms';
 import emailMask from 'text-mask-addons/dist/emailMask';
 import { CadastroPage } from '../cadastro/cadastro';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the LoginPage page.
@@ -37,13 +39,14 @@ export class LoginPage {
               public navParams: NavParams, 
               public user: UserProvider,
               public toastCtrl:ToastController,
-              public formBuilder: FormBuilder
+              public formBuilder: FormBuilder,
+              private storage: Storage
             
             ) {
 
   }
   ionViewWillLoad() {
-
+    this.LoginAutomatico();
     this.validations_form = this.formBuilder.group({
       email: new FormControl('teste40@teste40.com', Validators.compose([
         Validators.required,
@@ -97,6 +100,8 @@ export class LoginPage {
 
   logar(loginData){
     this.user.login(loginData).subscribe((data: any)=>{
+      this.storage.clear();
+      this.storage.set('loginData', loginData);
       this.navCtrl.setRoot(HomePage)
     }, error =>{
       if(error.status == 401){
@@ -118,6 +123,21 @@ export class LoginPage {
       
     });  
   }
+
+  LoginAutomatico(){
+    this.storage.get('loginData')    
+    .then((data : any) => {
+      this.user.login(data).subscribe((data: any)=>{
+        this.navCtrl.setRoot(HomePage)
+      }, 
+      error =>{  });
+
+    })
+    .catch(() => {
+        
+    });
+  }
+
 
 }
 
