@@ -89,7 +89,7 @@ export class HomePage {
   };
   onSearch(event) {
     let result: string = event.target.value;
-    let des: string = "des"
+    let des: string = "des";
     console.log(result);
     if (result && result.trim() != "") {
       this.servicoProvider.buscaPorTitulo(result).subscribe(

@@ -1,3 +1,6 @@
+import { LoginPage } from './../../pages/login/login';
+import { NavController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { ApiProvider } from './../api/api';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
@@ -13,7 +16,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 export class UserProvider {
   _user: any;
 
-  constructor(public api: ApiProvider,public  http: HttpClient) {
+  constructor(public api: ApiProvider,public  http: HttpClient, public storage : Storage) {
     console.log('Hello UserProvider Provider');
   }
 
@@ -42,6 +45,7 @@ export class UserProvider {
    */
   logout() {
     this._user = null;
+    this.storage.clear();
   }
 
   /**
@@ -49,6 +53,7 @@ export class UserProvider {
    */
   _loggedIn(resp) {
     this._user = resp;
+ 
   }
 
   getAutorizationToken(){
