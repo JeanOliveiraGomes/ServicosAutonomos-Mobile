@@ -19,6 +19,9 @@ export class ApiProvider {
   get(endpoint: string,  header: any) {
     return this.http.get(this.url + '/' + endpoint, header);
   }
+  getSemCabecalho(endpoint: string) {
+    return this.http.get(this.url + '/' + endpoint);
+  }
 
   post(endpoint: string, body: any, header: any) {
     return this.http.post(this.url + '/' + endpoint, body, header);

@@ -40,8 +40,8 @@ export class ServicoProvider {
     return requisicao;
   }
   listaAnuncios(){
-    let headers = this.headerComAuthenticacao();
-    let requisicao = this.api.get('protected/anuncios', {headers});
+    
+    let requisicao = this.api.getSemCabecalho('protected/anuncios');
 
     return requisicao;
   }

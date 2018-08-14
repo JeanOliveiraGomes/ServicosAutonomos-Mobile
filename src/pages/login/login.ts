@@ -79,9 +79,10 @@ export class LoginPage {
     this.navCtrl.push(CadastroPage);
   }
   goLogaSemServidor(){
-      this.navCtrl.setRoot(HomePage)
+      this.navCtrl.setRoot(HomePage);
       //this.navCtrl.push(HomePage);
   }
+
   ionViewDidEnter(){
     this.menu.enable(false);
   }
