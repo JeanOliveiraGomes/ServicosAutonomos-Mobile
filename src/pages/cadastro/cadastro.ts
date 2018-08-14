@@ -118,7 +118,7 @@ export class CadastroPage {
   }
   cadastra(cadastroData) {
     this.user.cadastrar(JSON.stringify(cadastroData)).subscribe((resp) => {
-      this.navCtrl.push(HomePage);
+      this.navCtrl.push(LoginPage);
     }, (error) => {
       if(error.status == 500){
         let toast = this.toastCtrl.create({
