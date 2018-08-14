@@ -40,9 +40,7 @@ export class ServicoProvider {
     return requisicao;
   }
   listaAnuncios(){
-    
     let requisicao = this.api.getSemCabecalho('protected/anuncios');
-
     return requisicao;
   }
 

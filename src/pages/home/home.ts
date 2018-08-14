@@ -1,8 +1,12 @@
+import { LoginPage } from './../login/login';
+import { Storage } from '@ionic/storage';
+import { CadastroPage } from './../cadastro/cadastro';
+import { UserProvider } from './../../providers/user/user';
 import { ServicoCadastroPage } from './../servico-cadastro/servico-cadastro';
 import { Component } from '@angular/core';
 import { NavController, ToastController, LoadingController } from 'ionic-angular';
 import { ServicoProvider } from '../../providers/servico/servico';
-import { LoginPage } from '../login/login';
+
 
 @Component({
   selector: 'page-home',
@@ -23,11 +27,14 @@ export class HomePage {
     public navCtrl: NavController,
     public servicoProvider: ServicoProvider,
     public toastCtrl: ToastController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public storage : Storage,
+    private userProvider : UserProvider
   ) { };
 
 
   candidatar(idServico: string){
+    if(this.userProvider._user != null){
     this.servicoProvider.candidatar(idServico).subscribe((data: any)=>{
       let toastg = this.toastCtrl.create({
         message: 'Parabens, candidatura efetuada com sucesso',
@@ -43,7 +50,9 @@ export class HomePage {
       });
       toastg.present();
       });
-       
+    }else{
+      this.navCtrl.push(CadastroPage);
+    }
   }
   doRefresh(refresher) {
 
@@ -115,7 +124,11 @@ export class HomePage {
   };
 
   goCadastrarServico() {
+    if(this.userProvider._user != null){
     this.navCtrl.push(ServicoCadastroPage);
+    }else{
+      this.navCtrl.push(CadastroPage);
+    }
   };
 
 };
