@@ -4,7 +4,7 @@
 
     <ion-searchbar [(ngModel)]="queryText" *ngIf="buscaTitulo" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="buscaTitulo=false"></ion-searchbar>
     <ion-buttons>
-      <button *ngIf="!buscaTitulo" ion-button icon-only menuToggle>
+      <button ion-button icon-only menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>

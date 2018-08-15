@@ -1,39 +1,64 @@
+import { MenuPage } from './../pages/menu/menu';
+import { HomePage } from './../pages/home/home';
 import { UserProvider } from './../providers/user/user';
-import { Component } from '@angular/core';
-import { Platform, App, NavController } from 'ionic-angular';
+import { Component, ViewChild, HostListener } from '@angular/core';
+import { Platform, App, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
-import { HomePage } from '../pages/home/home';
 import { Page } from '../../node_modules/ionic-angular/umd/navigation/nav-util';
-import { MeusServicosPage } from '../pages/meus-servicos/meus-servicos';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   
   
-  rootPage = LoginPage;
+  rootPage: any = LoginPage;
+  usuarioEmail:string;  
+  usuarioNome:string;
 
-  constructor(public app :App, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private userProvider: UserProvider) {
+  @ViewChild(Nav) nav: Nav;
+  
+  pages: any[] = [
+    { title: 'Meus Serviços', component: 'MeusServicosPage', active: true, icon: 'ios-home' }
+    //{ title: 'Busca Pessoas', component: 'NAO FOI CRIADO', active: true, icon: 'search' },
+    //{ title: 'Chat', component: 'NÃO FOI CRIADO', active: true, icon: 'ios-chatbubbles' },
+    //{ title: 'MinhaConta', component: 'MinhaContaPage', active: true, icon: 'md-person' }
+  ]
+
+
+constructor(public app :App, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private userProvider: UserProvider) {
     platform.ready().then(() => {
+
+      
+
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
+
+  }
+  @HostListener('document:click', ['$event'])
+  runThisMethod() {
+    this.usuarioEmail =this.userProvider._nome;
+    this.usuarioNome = this.userProvider._email;
   }
 
-  pushPage(page : Page){
-    let nav = this.app.getActiveNav();
-    nav.push(page);
+  homepage(){
+
+    this.nav.setRoot(HomePage);
   }
+  openPage(page) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.nav.setRoot(page.component);
+  }
+
 
 logout(){
   this.userProvider.logout();
-  this.pushPage(LoginPage);
+  this.nav.push(LoginPage);
 }
-meusServicos(){
-  this.pushPage(MeusServicosPage);
-}
+
 }

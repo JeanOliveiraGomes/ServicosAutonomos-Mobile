@@ -1,5 +1,3 @@
-import { LoginPage } from './../../pages/login/login';
-import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ApiProvider } from './../api/api';
 import { Injectable } from '@angular/core';
@@ -15,9 +13,24 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 @Injectable()
 export class UserProvider {
   _user: any;
+  _email:string;
+  _nome:string;
 
   constructor(public api: ApiProvider,public  http: HttpClient, public storage : Storage) {
     console.log('Hello UserProvider Provider');
+  }
+
+  headerComAuthenticacao(){
+    let headers = new HttpHeaders().append('Authorization', this.getAutorizationToken());
+    return headers;
+  }
+
+  getUsurioEmailNome(){
+    let headers = this.headerComAuthenticacao();
+    let requisicao = this.api.get('usuarios/protected',{headers}).subscribe((data: any) =>{
+      this._email = data.email;
+      this._nome = data.nome;
+    });
   }
 
 

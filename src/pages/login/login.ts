@@ -1,4 +1,4 @@
-import { IonicStorageModule } from '@ionic/storage';
+import { MyApp } from './../../app/app.component';
 import { HomePage } from './../home/home';
 import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
@@ -40,11 +40,12 @@ export class LoginPage {
               public user: UserProvider,
               public toastCtrl:ToastController,
               public formBuilder: FormBuilder,
-              private storage: Storage
+              private storage: Storage,
+              public myApp: MyApp
             
-            ) {
+            ) { }
 
-  }
+
   ionViewWillLoad() {
     this.LoginAutomatico();
     this.validations_form = this.formBuilder.group({
@@ -100,10 +101,12 @@ export class LoginPage {
   }
 
   logar(loginData){
+ 
     this.user.login(loginData).subscribe((data: any)=>{
       this.storage.clear();
       this.storage.set('loginData', loginData);
-      this.navCtrl.setRoot(HomePage)
+      this.user.getUsurioEmailNome();
+      this.navCtrl.setRoot(HomePage);
     }, error =>{
       if(error.status == 401){
         let toastg = this.toastCtrl.create({
@@ -126,22 +129,11 @@ export class LoginPage {
   }
 
   LoginAutomatico(){
-    this.storage.get('loginData')    
-    .then((data : any) => {
+    this.storage.get('loginData').then((data : any) => {
       if(data != null){
-      this.user.login(data).subscribe((data: any)=>{
-        this.navCtrl.setRoot(HomePage)
-      }, 
-      error =>{  });
-
-    }
-  })
-    .catch(() => {
-        
-    });
+      this.logar(data);
+      }
+     });
   }
-
-
 }
-
 
