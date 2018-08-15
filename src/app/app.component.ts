@@ -1,4 +1,3 @@
-import { MenuPage } from './../pages/menu/menu';
 import { HomePage } from './../pages/home/home';
 import { UserProvider } from './../providers/user/user';
 import { Component, ViewChild, HostListener } from '@angular/core';
