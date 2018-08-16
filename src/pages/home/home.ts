@@ -30,7 +30,9 @@ export class HomePage {
     public loadingCtrl: LoadingController,
     public storage : Storage,
     private userProvider : UserProvider
-  ) { };
+  ) { 
+
+  };
 
 
   candidatar(idServico: string){

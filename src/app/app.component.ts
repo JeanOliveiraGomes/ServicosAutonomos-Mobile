@@ -29,8 +29,6 @@ export class MyApp {
 constructor(public app :App, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private userProvider: UserProvider) {
     platform.ready().then(() => {
 
-      
-
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
@@ -38,8 +36,9 @@ constructor(public app :App, platform: Platform, statusBar: StatusBar, splashScr
     });
 
   }
-  @HostListener('document:click', ['$event'])
+  @HostListener('mouseover', ['$event'])
   runThisMethod() {
+    this.userProvider.getUsurioEmailNome();
     this.usuarioEmail =this.userProvider._nome;
     this.usuarioNome = this.userProvider._email;
   }
