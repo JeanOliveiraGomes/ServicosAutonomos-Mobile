@@ -13,8 +13,8 @@ export class MyApp {
   
   
   rootPage: any = LoginPage;
-  usuarioEmail:string;  
-  usuarioNome:string;
+  usuarioEmail:string = null;  
+  usuarioNome:string = null;
 
   @ViewChild(Nav) nav: Nav;
   
@@ -29,6 +29,8 @@ export class MyApp {
 constructor(public app :App, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private userProvider: UserProvider) {
     platform.ready().then(() => {
 
+  
+
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
@@ -36,11 +38,13 @@ constructor(public app :App, platform: Platform, statusBar: StatusBar, splashScr
     });
 
   }
-  @HostListener('mouseover', ['$event'])
+  @HostListener('touchend', ['$event'])
   runThisMethod() {
-    this.userProvider.getUsurioEmailNome();
-    this.usuarioEmail =this.userProvider._nome;
-    this.usuarioNome = this.userProvider._email;
+    if((this.usuarioEmail || this.usuarioNome)==null){
+      this.usuarioEmail =this.userProvider._nome;
+      this.usuarioNome = this.userProvider._email;
+    }
+
   }
 
   homepage(){

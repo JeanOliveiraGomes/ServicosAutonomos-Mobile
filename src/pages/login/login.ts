@@ -105,7 +105,9 @@ export class LoginPage {
     this.user.login(loginData).subscribe((data: any)=>{
       this.storage.clear();
       this.storage.set('loginData', loginData);
-      this.navCtrl.setRoot(HomePage);
+      this.user._user = data;
+      this.navCtrl.setRoot(HomePage);   
+      
     }, error =>{
       if(error.status == 401){
         let toastg = this.toastCtrl.create({

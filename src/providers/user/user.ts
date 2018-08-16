@@ -31,6 +31,7 @@ export class UserProvider {
       this._email = data.email;
       this._nome = data.nome;
     });
+    return requisicao;
   }
 
 
@@ -45,10 +46,7 @@ export class UserProvider {
     let request = this.api.post('login',credenciais, {responseType: 'text'});
 
     request.subscribe((data: any)=>{
-      
-      this._loggedIn(data);
-      console.log(data);
-      
+        console.log(data);
     });
     return request;
   }
@@ -66,7 +64,6 @@ export class UserProvider {
    */
   _loggedIn(resp) {
     this._user = resp;
- 
   }
 
   getAutorizationToken(){

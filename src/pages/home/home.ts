@@ -31,6 +31,7 @@ export class HomePage {
     public storage : Storage,
     private userProvider : UserProvider
   ) { 
+    this.userProvider.getUsurioEmailNome();
 
   };
 
