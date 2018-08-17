@@ -1,10 +1,11 @@
 <ion-header>
-
+  
   <ion-navbar>
-
+    
     <ion-searchbar [(ngModel)]="queryText" *ngIf="buscaTitulo" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="buscaTitulo=false"></ion-searchbar>
+    
     <ion-buttons>
-      <button ion-button icon-only menuToggle>
+      <button *ngIf="!buscaTitulo" ion-button icon-only menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
@@ -16,27 +17,25 @@
 
 
   </ion-navbar>
+
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding auto-hide>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <button ion-button full (click)="goCadastrarServico()">Cadastro de Servico</button>
-
   <ion-card *ngFor="let anuncio of lista_anuncios">
-
     <ion-item>
       <ion-avatar item-start>
         <img src="assets/icon/icone-do-usuario.jpg">
       </ion-avatar>
-      <h2> {{anuncio.anunciante.nome}}</h2>
+      <h2>{{anuncio.titulo}}</h2>
+      <p>{{anuncio.anunciante.nome}}, Brasilia </p>
+      <br>
+      
     </ion-item>
-    <ion-card-header>
-      {{anuncio.titulo}}
-    </ion-card-header>
     <ion-card-content>
       {{anuncio.descricao}}
 
@@ -62,5 +61,12 @@
       </ion-row>
     </ion-card-content>
   </ion-card>
+  <ion-fab center bottom #fab>
+    <button ion-fab (click)="goCadastrarServico()">
+    <ion-icon name="ios-create-outline"></ion-icon>
+  </button>
+    
+  </ion-fab>
+  
 
 </ion-content>

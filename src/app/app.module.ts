@@ -19,11 +19,13 @@ import { ServicoProvider } from '../providers/servico/servico';
 import { ValidatorsModule } from '../validators/validators.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { MeusServicosPage } from '../pages/meus-servicos/meus-servicos';
+import { AutoHideDirective } from '../directives/auto-hide/auto-hide';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    AutoHideDirective
   ],
   imports: [
     BrowserModule,
