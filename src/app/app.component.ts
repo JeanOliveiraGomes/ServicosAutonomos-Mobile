@@ -5,7 +5,6 @@ import { Platform, App, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
-import { Page } from '../../node_modules/ionic-angular/umd/navigation/nav-util';
 @Component({
   templateUrl: 'app.html'
 })

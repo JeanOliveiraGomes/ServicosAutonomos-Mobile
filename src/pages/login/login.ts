@@ -106,6 +106,7 @@ export class LoginPage {
       this.storage.clear();
       this.storage.set('loginData', loginData);
       this.user._user = data;
+      this.user.getUsurioEmailNome();
       this.navCtrl.setRoot(HomePage);   
       
     }, error =>{

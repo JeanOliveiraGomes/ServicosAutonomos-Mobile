@@ -30,10 +30,7 @@ export class HomePage {
     public loadingCtrl: LoadingController,
     public storage : Storage,
     private userProvider : UserProvider
-  ) { 
-    this.userProvider.getUsurioEmailNome();
-
-  };
+  ) { };
 
 
   candidatar(idServico: string){

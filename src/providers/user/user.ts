@@ -12,7 +12,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 */
 @Injectable()
 export class UserProvider {
-  _user: string ='';
+  _user: string = null;
   _email:string;
   _nome:string;
 
