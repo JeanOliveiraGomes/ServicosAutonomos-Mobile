@@ -21,6 +21,9 @@
 
 
     <ion-content padding>
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content></ion-refresher-content>
+          </ion-refresher>
 
         <ion-card *ngFor="let anuncio of meus_anuncios">
       
@@ -35,7 +38,13 @@
           </ion-card-header>
           <ion-card-content>
             {{anuncio.descricao}}
-      
+
+            <ion-row>
+              <button full ion-button icon-start color='danger' (click)="deletar(anuncio.id)">
+                  <ion-icon name="trash"></ion-icon>
+                  <div>Apagar Anúncio</div>
+              </button>
+            </ion-row>
             <ion-row>
               <ion-col center text-center>
                 <ion-note>

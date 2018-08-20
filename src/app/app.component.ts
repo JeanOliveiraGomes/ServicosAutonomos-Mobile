@@ -18,7 +18,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
   pages: any[] = [
-    { title: 'Meus Serviços', component: 'MeusServicosPage', active: true, icon: 'ios-home' }
+    { title: 'Meus Serviços', component: 'MeusServicosPage', active: true, icon: 'albums' }
     //{ title: 'Busca Pessoas', component: 'NAO FOI CRIADO', active: true, icon: 'search' },
     //{ title: 'Chat', component: 'NÃO FOI CRIADO', active: true, icon: 'ios-chatbubbles' },
     //{ title: 'MinhaConta', component: 'MinhaContaPage', active: true, icon: 'md-person' }

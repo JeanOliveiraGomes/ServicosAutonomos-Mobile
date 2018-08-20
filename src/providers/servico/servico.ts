@@ -21,6 +21,13 @@ export class ServicoProvider {
     return headers;
   }
 
+  deletar(anuncioId: string){
+    let headers = new HttpHeaders().append('Authorization', this.user.getAutorizationToken());
+    let requisicao = this.api.post('protected/anuncios/deletar',anuncioId,{headers});
+    return requisicao;
+
+  }
+
   candidatar( servicoId: string){
     let headers = this.headerComAuthenticacao();
     let requisicao = this.api.put('protected/anuncios', servicoId, {headers});

@@ -1,4 +1,3 @@
-import { LoginPage } from './../login/login';
 import { Storage } from '@ionic/storage';
 import { CadastroPage } from './../cadastro/cadastro';
 import { UserProvider } from './../../providers/user/user';
