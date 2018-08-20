@@ -24,6 +24,7 @@ export class AutoHideDirective {
   }
   
   onScrollContent(e){
+   
    if(e.scrollTop - this.oldScrollTop > 10){
      
      this.renderer.setElementStyle(this.fabToHide, "opacity", "0");

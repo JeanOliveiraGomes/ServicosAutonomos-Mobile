@@ -39,8 +39,12 @@ export class ServicoProvider {
 
     return requisicao;
   }
-  listaAnuncios(){
-    let requisicao = this.api.getSemCabecalho('protected/anuncios');
+  listaAnuncios(page = 0, size=3){
+    let requisicao = this.api.getSemCabecalho(`protected/anuncios/servico-paginado?page=${page}&size=${size}`);
+    return requisicao;
+  }
+  listaAnuncios2(){
+    let requisicao = this.api.getSemCabecalho(`protected/anuncios`);
     return requisicao;
   }
 

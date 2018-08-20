@@ -18,8 +18,11 @@ export class HomePage {
   public buscaTitulo = false;
   public lista_anuncios = new Array<any>();
   public loader;
-  public refresher;
-  public isRefresher: boolean = false;
+  public page = 0;
+  public size;
+  public tamanho;
+
+  public infiniteScroll;
 
 
   constructor(
@@ -28,63 +31,85 @@ export class HomePage {
     public servicoProvider: ServicoProvider,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
-    public storage : Storage,
-    private userProvider : UserProvider
-  ) { };
+    public storage: Storage,
+    private userProvider: UserProvider
+  ) {
+    this.carregarServico();
 
 
-  candidatar(idServico: string){
-    if(this.userProvider._user != null){
-    this.servicoProvider.candidatar(idServico).subscribe((data: any)=>{
-      let toastg = this.toastCtrl.create({
-        message: 'Parabens, candidatura efetuada com sucesso',
-        duration: 3000,
-        position: 'top'
+  };
+
+
+  candidatar(idServico: string) {
+    if (this.userProvider._user != null) {
+      this.servicoProvider.candidatar(idServico).subscribe((data: any) => {
+        let toastg = this.toastCtrl.create({
+          message: 'Parabens, candidatura efetuada com sucesso',
+          duration: 3000,
+          position: 'top'
         });
         toastg.present();
-    }, err =>{
-      let toastg = this.toastCtrl.create({
-      message: 'Você ja é candidato ou é dono deste serviço!',
-      duration: 3000,
-      position: 'top'
+      }, err => {
+        let toastg = this.toastCtrl.create({
+          message: 'Você ja é candidato ou é dono deste serviço!',
+          duration: 3000,
+          position: 'top'
+        });
+        toastg.present();
       });
-      toastg.present();
-      });
-    }else{
+    } else {
       this.navCtrl.push(CadastroPage);
     }
   }
-  doRefresh(refresher) {
 
-    this.refresher = refresher;
-    this.isRefresher = true;
-    this.carregarFilmes();
-  }
-  carregarFilmes() {
-    this.abreCarregando();
-    this.servicoProvider.listaAnuncios().subscribe(
+  doInfinite(infiniteScroll) {
+
+    this.page++
+    this.servicoProvider.listaAnuncios(this.page, this.size).subscribe(
       data => {
         const response = (data as any)
-        this.lista_anuncios = response;
-        this.fechaCarregando();
-        if (this.refresher) {
-          this.refresher.complete();
-          this.isRefresher = false;
-        };
+        this.lista_anuncios = this.lista_anuncios.concat(response)
+        infiniteScroll.complete();
       }, error => {
         console.log(error);
-        this.fechaCarregando();
-        if (this.refresher) {
-          this.refresher.complete();
-          this.isRefresher = false;
-        };
+
+      }
+    )
+
+
+
+  }
+
+
+  carregarServico(newpage: boolean = false) {
+
+    this.servicoProvider.listaAnuncios(this.page, this.size).subscribe(
+      data => {
+        const response = (data as any)
+
+
+        if (newpage) {
+          this.lista_anuncios = this.lista_anuncios.concat(response)
+          this.tamanho = this.lista_anuncios.length
+
+        } else {
+          this.lista_anuncios = response;
+
+        }
+
+
+
+
+      }, error => {
+        console.log(error);
+
       }
     )
   };
 
-  ionViewDidEnter() {
-    this.carregarFilmes();
-  };
+
+
+
 
   abreCarregando() {
     this.loader = this.loadingCtrl.create({
@@ -124,9 +149,9 @@ export class HomePage {
   };
 
   goCadastrarServico() {
-    if(this.userProvider._user != null){
-    this.navCtrl.push(ServicoCadastroPage);
-    }else{
+    if (this.userProvider._user != null) {
+      this.navCtrl.push(ServicoCadastroPage);
+    } else {
       this.navCtrl.push(CadastroPage);
     }
   };
