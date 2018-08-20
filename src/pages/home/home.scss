@@ -19,6 +19,8 @@ page-home {
         flex-grow: 1;
         max-width: 100%;
       }
-   
+      ion-label.label.label-md {
+        white-space: unset;
+    }
 
 }
