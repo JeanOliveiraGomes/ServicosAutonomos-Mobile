@@ -8,7 +8,7 @@ import { Directive , Renderer , ElementRef} from '@angular/core';
  */
 @Directive({
   selector: '[auto-hide]',
-  //host: {'(ionScroll)' : '(onScrollContent($event))' }
+  host: {'(ionScroll)' : '(onScrollContent($event))' }
 })
 export class AutoHideDirective {
  
@@ -23,7 +23,7 @@ export class AutoHideDirective {
     this.renderer.setElementStyle(this.fabToHide,"webkitTransition", "trasnform 500ms, opacity 500ms")
   }
   
-  /*
+  
   onScrollContent(e){
    
    if(e.scrollTop - this.oldScrollTop > 10){
@@ -37,5 +37,5 @@ export class AutoHideDirective {
    }
    this.oldScrollTop = e.scrollTop;
   }
-  */
+  
 }

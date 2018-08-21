@@ -17,13 +17,24 @@
 
 
   </ion-navbar>
-
+  
 </ion-header>
 
 
-<ion-content padding  auto-hide>
+<ion-content  padding  auto-hide>
+  
   
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Carregando...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
+  
   <ion-card *ngFor="let anuncio of lista_anuncios">
     <ion-item>
       <ion-avatar item-start>
@@ -66,7 +77,10 @@
     
   </ion-fab>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Carregando mais serviços...">
+  </ion-infinite-scroll-content>
  </ion-infinite-scroll>
   
 

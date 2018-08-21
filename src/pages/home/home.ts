@@ -74,10 +74,25 @@ export class HomePage {
 
       }
     )
-
-
-
   }
+
+  doRefresh(refresher) {
+    
+    
+    this.servicoProvider.listaAnuncios().subscribe(
+      data => {
+        const response = (data as any)
+        this.lista_anuncios = response
+        refresher.complete();
+      }, error => {
+        console.log(error);
+
+      }
+    )
+    
+    
+  }
+
 
 
   carregarServico(newpage: boolean = false) {
