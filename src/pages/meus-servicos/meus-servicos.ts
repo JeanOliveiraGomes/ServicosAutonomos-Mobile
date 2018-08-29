@@ -1,3 +1,4 @@
+import { CandidatosPage } from './../candidatos/candidatos';
 import { ServicoProvider } from './../../providers/servico/servico';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
@@ -67,6 +68,14 @@ export class MeusServicosPage {
     this.refresher = refresher;
     this.isRefresher = true;
     this.getMeusServicos();
+  }
+
+  goCandidatos(id:string){
+   
+    this.navCtrl.push(CandidatosPage, {
+      id: id
+
+    });
   }
 
 }

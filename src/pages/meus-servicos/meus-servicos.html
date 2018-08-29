@@ -40,6 +40,10 @@
             {{anuncio.descricao}}
 
             <ion-row>
+                <button full ion-button icon-start (click)="goCandidatos(anuncio.id)">
+                    <ion-icon name="list"></ion-icon>
+                    <div>Listar Candidatos</div>
+                </button>
               <button full ion-button icon-start color='danger' (click)="deletar(anuncio.id)">
                   <ion-icon name="trash"></ion-icon>
                   <div>Apagar Anúncio</div>

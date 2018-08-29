@@ -1,3 +1,5 @@
+import { CandidatosPageModule } from './../pages/candidatos/candidatos.module';
+import { CandidatosPage } from './../pages/candidatos/candidatos';
 import { MeusServicosPageModule } from './../pages/meus-servicos/meus-servicos.module';
 import { LoginPageModule } from './../pages/login/login.module';
 import { ServicoCadastroPageModule } from './../pages/servico-cadastro/servico-cadastro.module';
@@ -35,6 +37,7 @@ import { AutoHideDirective } from '../directives/auto-hide/auto-hide';
     MeusServicosPageModule,
     ServicoCadastroPageModule,
     LoginPageModule,
+    CandidatosPageModule,
     ValidatorsModule,
     IonicStorageModule.forRoot()
   ],
@@ -45,7 +48,8 @@ import { AutoHideDirective } from '../directives/auto-hide/auto-hide';
     CadastroPage,
     ServicoCadastroPage,
     LoginPage,
-    MeusServicosPage
+    MeusServicosPage,
+    CandidatosPage
   ],
   providers: [
     StatusBar,
