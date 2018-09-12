@@ -67,5 +67,11 @@ export class ServicoProvider {
     return requisicao;
   }
 
+  getCandidatos(id: string){
+    let headers = this.headerComAuthenticacao();
+    let requisicao = this.api.get('protected/anuncios/candidatos/'+id, {headers});
+    return requisicao;
+  }
+
 
 }

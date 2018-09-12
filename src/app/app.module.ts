@@ -1,3 +1,5 @@
+import { CandidatosPageModule } from './../pages/candidatos/candidatos.module';
+import { CandidatosPage } from './../pages/candidatos/candidatos';
 import { MeusServicosPageModule } from './../pages/meus-servicos/meus-servicos.module';
 import { LoginPageModule } from './../pages/login/login.module';
 import { ServicoCadastroPageModule } from './../pages/servico-cadastro/servico-cadastro.module';
@@ -38,6 +40,7 @@ registerLocaleData(ptBr)
     MeusServicosPageModule,
     ServicoCadastroPageModule,
     LoginPageModule,
+    CandidatosPageModule,
     ValidatorsModule,
     IonicStorageModule.forRoot()
   ],
@@ -48,7 +51,8 @@ registerLocaleData(ptBr)
     CadastroPage,
     ServicoCadastroPage,
     LoginPage,
-    MeusServicosPage
+    MeusServicosPage,
+    CandidatosPage
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "pt" },
