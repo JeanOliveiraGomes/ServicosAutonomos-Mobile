@@ -46,7 +46,7 @@ export class ServicoProvider {
 
     return requisicao;
   }
-  listaAnuncios(page = 0, size=3){
+  listaAnuncios(page = 0, size=10){
     let requisicao = this.api.getSemCabecalho(`protected/anuncios/servico-paginado?page=${page}&size=${size}`);
     return requisicao;
   }

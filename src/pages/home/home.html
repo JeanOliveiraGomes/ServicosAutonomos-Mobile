@@ -2,8 +2,8 @@
   
   <ion-navbar>
     
-    <ion-searchbar [(ngModel)]="queryText" *ngIf="buscaTitulo" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="buscaTitulo=false"></ion-searchbar>
-    
+    <ion-searchbar [(ngModel)]="queryText" *ngIf="buscaTitulo" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="onCancel()"></ion-searchbar>
+
     <ion-buttons>
       <button *ngIf="!buscaTitulo" ion-button icon-only menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -63,7 +63,7 @@
         </ion-col>
         <ion-col center text-center>
           <ion-note>
-            <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="anuncio.dataHora"></ion-datetime>
+            {{anuncio.dataHora | date:'EEEE dd/MM/yyyy'}} às  {{anuncio.dataHora | date:'HH:mm'}}
           </ion-note>
         </ion-col>
 

@@ -48,7 +48,7 @@
             <ion-row>
               <ion-col center text-center>
                 <ion-note>
-                  <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="anuncio.dataHora"></ion-datetime>
+                  {{anuncio.dataHora | date:'EEEE dd/MM/yyyy'}} às  {{anuncio.dataHora | date:'HH:mm'}}
                 </ion-note>
               </ion-col>
       

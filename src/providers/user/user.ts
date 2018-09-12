@@ -34,6 +34,12 @@ export class UserProvider {
     return requisicao;
   }
 
+  getDadosUsuario(){
+    let headers = this.headerComAuthenticacao();
+    let requisicao = this.api.get('usuarios/protected',{headers});
+    return requisicao;
+  }
+
 
   cadastrar(credenciais: any){
     let headers = new HttpHeaders().set('Content-Type','application/json');

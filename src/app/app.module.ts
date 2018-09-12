@@ -20,7 +20,10 @@ import { ValidatorsModule } from '../validators/validators.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { MeusServicosPage } from '../pages/meus-servicos/meus-servicos';
 import { AutoHideDirective } from '../directives/auto-hide/auto-hide';
-
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import ptBr from '@angular/common/locales/pt';
+registerLocaleData(ptBr)
 @NgModule({
   declarations: [
     MyApp,
@@ -48,12 +51,14 @@ import { AutoHideDirective } from '../directives/auto-hide/auto-hide';
     MeusServicosPage
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: "pt" },
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiProvider,
     UserProvider,
-    ServicoProvider
+    ServicoProvider,
+    
   ]
 })
 export class AppModule {}
