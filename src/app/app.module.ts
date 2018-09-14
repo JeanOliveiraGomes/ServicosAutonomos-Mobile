@@ -25,12 +25,15 @@ import { AutoHideDirective } from '../directives/auto-hide/auto-hide';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
+import { PipesModule } from '../pipes/pipes.module';
+
 registerLocaleData(ptBr)
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    AutoHideDirective
+    AutoHideDirective,
+    
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ registerLocaleData(ptBr)
     LoginPageModule,
     CandidatosPageModule,
     ValidatorsModule,
+    PipesModule,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

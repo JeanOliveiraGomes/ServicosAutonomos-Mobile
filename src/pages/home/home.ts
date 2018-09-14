@@ -7,9 +7,12 @@ import { NavController, ToastController, LoadingController, AlertController } fr
 import { ServicoProvider } from '../../providers/servico/servico';
 
 
+
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  
+ 
 })
 export class HomePage {
 

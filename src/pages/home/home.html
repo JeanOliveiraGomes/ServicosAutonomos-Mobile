@@ -41,13 +41,12 @@
         <img src="assets/icon/icone-do-usuario.jpg">
       </ion-avatar>
       <h2>{{anuncio.titulo}}</h2>
-      <p>{{anuncio.anunciante.nome}}, Brasilia </p>
+      <p>{{anuncio.anunciante.nome |nameFilter}}, Brasilia </p>
       <br>
       
     </ion-item>
     <ion-card-content>
-      {{anuncio.descricao}}
-
+      {{anuncio.descricao  | elipseFilter:100 }}
       <ion-row>
         <ion-col>
           <button ion-button icon-start>
